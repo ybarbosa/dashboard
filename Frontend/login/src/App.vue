@@ -1,13 +1,16 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-  </div>
+  <v-app id="app">
+    <sign-in />
+  </v-app>
 </template>
 
 <script>
-
+import SignIn from './components/SignIn'
 export default {
   name: 'App',
+  components: {
+    'sign-in': SignIn
+  }
 }
 </script>
 
