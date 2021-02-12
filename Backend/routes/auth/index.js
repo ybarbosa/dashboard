@@ -1,4 +1,4 @@
-const router = require('express').Router()
+const router = require('../router')
 const db = require('../../db/infrastructure')
 const dbName = 'users'
 router.get('/', async (_, res) => {
