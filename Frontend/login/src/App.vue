@@ -39,20 +39,21 @@
         cols="11"
         md="6"
       >
-        <sign-in />
+        <transition
+          name="fade"
+          mode="out-in"
+        >
+          <router-view />
+        </transition>
       </v-col>
     </v-row>
   </v-app>
 </template>
 
 <script>
-import SignIn from './components/SignIn'
 import assets from './assets'
 export default {
   name: 'App',
-  components: {
-    'sign-in': SignIn
-  },
   data () {
     return {
       background: assets.background
