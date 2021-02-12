@@ -30,7 +30,7 @@
                                     />
                             </v-card-title>
                             <v-card-actions
-                             class="mt-5"
+                            class="mt-5"
                             >
                                 <v-row
                                     no-gutters
@@ -105,12 +105,15 @@
                                             outlined
                                             color="#4A148C"
                                             class="mr-4"
+                                            large
+                                            @click="$router.push('/signup')"
                                         >
                                             Cadastrar
                                         </v-btn>
                                         <v-btn
                                             color="#4A148C"
                                             class="white--text"
+                                            large
                                         >
                                             Acessar
                                         </v-btn>
@@ -118,7 +121,6 @@
                                 </v-row>
                             </v-card-actions>
                         </v-card>
-
                     </v-col>
                 </v-row>
             </v-col>
