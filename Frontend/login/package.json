@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "cross-env NODE_ENV=development vue-cli-service serve --open --host localhost",
+    "serve": "cross-env NODE_ENV=development vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -13,6 +13,7 @@
     "cross-env": "^7.0.3",
     "vue": "^2.6.11",
     "vue-google-login": "^2.0.5",
+    "vue-router": "^3.5.1",
     "vuetify": "^2.4.0"
   },
   "devDependencies": {
