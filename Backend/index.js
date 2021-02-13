@@ -10,10 +10,11 @@ const { auth, users } = require('./routes')
 app.use(bodyParser.urlencoded({
     extended: true
 }))
+
 app.use(bodyParser.json())
 app.use(cors())
 app.use('/auth', auth)
-app.use('/user', users)
+app.use('/users', users)
 
 app.listen(PORT, HOST, () => {
     console.log('Listening PORT 9001')
