@@ -6,7 +6,7 @@ const auth = (req,res, next) => {
     if(!tokenHeader) return res.status(401).send( { error: 'token not sent' } )
 
     jwt.verify( tokenHeader, 'xuxinha' ,(err, decoded) => {
-        if(err) return res.status(404).send( { error: 'token invalid' } )
+        if(err) return res.status(401).send( { error: 'token invalid' } )
     })
     return next()
 }
