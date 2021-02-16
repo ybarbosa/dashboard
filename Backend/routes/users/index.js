@@ -1,6 +1,6 @@
 const router = require('../router')
 const create = require('./create')
-const get = require('./get')
+const get = require('./findUsers')
 const { body } = require('express-validator')
 
 const validators = [
