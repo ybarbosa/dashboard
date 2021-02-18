@@ -8,7 +8,10 @@ export default {
             email: 'Email nâo é valido',
             is: 'É necessário aceitar',
             date_format: 'Esta data não é valida',
-            date_between: 'Esta data não é valida'
+            date_between: 'Esta data não é valida',
+            confirmed: 'A confirmação de senha não confere'
         }
     }
 }
+
+
