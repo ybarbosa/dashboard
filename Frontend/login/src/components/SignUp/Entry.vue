@@ -14,6 +14,7 @@
                 >
                     <v-col
                         cols="12"
+                        sm="8"
                         md="12"
                         lg="8"
                     >
@@ -45,37 +46,125 @@
                                         cols="12"
                                     >
                                         <v-text-field
+                                            outlined
+                                            name="name"
+                                            label="Nome completo"
+                                            placeholder="Digite seu nome completo"
+                                            v-validate="'required'"
+                                            v-model="name"
+                                        />
+                                        <div
+                                            v-show="errors.has('name')"
+                                        >
+                                            <v-alert
+                                                dense
+                                                text
+                                                type="error"
+                                                class="mt-n3 mb-3"
+                                            >
+                                                {{ errors.first('name') }}
+                                            </v-alert>
+                                        </div>
+                                    </v-col>
+                                    <v-col
+                                        cols="12"
+                                    >
+                                        <v-text-field
+                                            outlined
+                                            name="email"
                                             label="Email"
                                             placeholder="Digite seu email"
-                                            outlined
+                                            v-validate="'required|email'"
+                                            v-model="email"
                                         />
+                                        <div
+                                            v-show="errors.has('email')"
+                                        >
+                                            <v-alert
+                                                dense
+                                                text
+                                                type="error"
+                                                class="mt-n3 mb-3"
+                                            >
+                                                {{ errors.first('email') }}
+                                            </v-alert>
+                                        </div>
                                     </v-col>
                                     <v-col
                                         cols="12"
                                     >
                                         <v-text-field
+                                            outlined
+                                            name="birthday"
                                             label="Nascimento"
-                                            placeholder="Digite seu nascimento"
-                                            outlined
+                                            placeholder="DD/MM/AAAA"
+                                            v-mask="'##/##/####'"
+                                            v-validate="'required|date_format:dd/MM/yyyy'"
+                                            v-model="birthday"
                                         />
+                                        <div
+                                            v-show="errors.has('birthday')"
+                                        >
+                                            <v-alert
+                                                dense
+                                                text
+                                                type="error"
+                                                class="mt-n3 mb-3"
+                                            >
+                                                {{ errors.first('birthday') }}
+                                            </v-alert>
+                                        </div>
                                     </v-col>
                                     <v-col
                                         cols="12"
                                     >
                                         <v-text-field
+                                            outlined
+                                            ref="password"
+                                            name="password"
                                             label="Senha"
-                                            placeholder="Digite sua senha"
-                                            outlined
+                                            placeholder="Minimo 3 caracteres"
+                                            type="password"
+                                            v-validate="'required|min:3'"
+                                            v-model="password"
                                         />
+                                        <div
+                                            v-show="errors.has('password')"
+                                        >
+                                            <v-alert
+                                                dense
+                                                text
+                                                type="error"
+                                                class="mt-n3 mb-3"
+                                            >
+                                                {{ errors.first('password') }}
+                                            </v-alert>
+                                        </div>
                                     </v-col>
                                     <v-col
                                         cols="12"
                                     >
                                         <v-text-field
+                                            outlined
+                                            name="confirmPassword"
                                             label="Confirmar Senha"
                                             placeholder="Confirme sua senha"
-                                            outlined
+                                            type="password"
+                                            v-validate="'required|confirmed:password'"
+                                            v-model="confirmPassword"
                                         />
+                                        <div
+                                            v-show="errors.has('confirmPassword')"
+                                        >
+                                            <v-alert
+                                                dense
+                                                text
+                                                type="error"
+                                                class="mt-n3 mb-3"
+                                            >
+                                                {{ errors.first('confirmPassword') }}
+                                            </v-alert>
+                                        </div>
                                     </v-col>
                                 </v-row>
                             </v-card-text>
@@ -102,6 +191,7 @@
                                             color="#4A148C"
                                             class="white--text"
                                             large
+                                            @click="submitUser"
                                         >
                                             Cadastrar
                                         </v-btn>
@@ -117,9 +207,34 @@
     </v-container>
 </template>
 <script>
+import moment from 'moment'
 export default {
     name: 'SignUp',
+    data: () => ({
+        name: null,
+        email: null,
+        birthday: null,
+        password: null,
+        confirmPassword: null
+
+    }),
     methods: {
+        async submitUser () {
+            const formIsValid = await this.$validator.validateAll()
+             
+            if (!formIsValid) {
+                return 
+            }
+
+            const modelUser = {
+                name: this.name,
+                email: this.email,
+                birthday: moment(this.birthday, 'DD/MM/YYYY').format('YYYY/MM/DD'),
+                password: this.password
+            }
+
+            console.log(modelUser)
+        }
     }
 }
 </script>
