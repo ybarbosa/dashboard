@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  auth-frontend:
+    build: 
+      context: ./Frontend/login
+    ports: 
+      - 8081:8081
+    container_name: auth-frontend
+    command: ["npm", "run", "serve"]
