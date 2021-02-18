@@ -148,8 +148,8 @@ export default {
     },
     methods : { 
         onSuccess ( googleUser ) { 
-            console . log ( googleUser ) ;
-            console.log (googleUser.getBasicProfile()) ;
+            console.log (googleUser.getFamilyName()) ;
+            console.log(googleUser)
         }
     }
 }

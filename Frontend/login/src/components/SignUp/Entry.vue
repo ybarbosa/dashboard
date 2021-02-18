@@ -31,6 +31,13 @@
                                 />
                             </v-card-title>
                             <v-card-text>
+                                <span
+                                    class="text-h6"
+                                >
+                                    Inscreva-se
+                                </span>
+                            </v-card-text>
+                            <v-card-text>
                                 <v-row
                                     no-gutters
                                 >
