@@ -1,13 +1,11 @@
 const router = require('../express')
-const findUser = require('./findUser')
+const findUser = require('./user')
 const { body } = require('express-validator')
 
 router.post('/', 
-	body('email').exists().withMessage('campo Obrigatorio').isEmail(),
-	findUser,
-	(req,res) => {
-		console.log(req.token)
-	}
+	body('email').exists().isEmail(),
+	body('password').exists().isString(),
+	findUser
 )
 
 module.exports = router
