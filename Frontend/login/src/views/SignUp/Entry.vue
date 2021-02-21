@@ -2,6 +2,7 @@
     <v-container
         fluid
         class="ma-0 pa-0 body d-inline-flex .d-md-flex align-center"
+        :style="{ height:'100%'}"
     >
         <v-row
             no-gutters
@@ -233,7 +234,9 @@ export default {
                 password: this.password
             }
 
-            console.log(modelUser)
+            await this.$http.post('/users/create', modelUser)
+
+            this.$emit('submit-user', modelUser)
         }
     }
 }
