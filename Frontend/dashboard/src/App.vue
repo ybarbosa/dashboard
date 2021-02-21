@@ -12,6 +12,11 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  created () {
+    console.log(window.location.origin)
+    const redirect = encodeURIComponent(window.location.origin)
+    window.location.href = `http://localhost:8081/#/?callback=${redirect}`
   }
 }
 </script>
