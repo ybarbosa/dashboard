@@ -184,7 +184,7 @@
                                             color="#4A148C"
                                             class="mr-4"
                                             large
-                                            @click="$router.push('/')"
+                                            @click="goSignIn"
                                         >
                                             Voltar
                                         </v-btn>
@@ -204,39 +204,69 @@
                 </v-row>
             </v-col>
         </v-row>
-        
+        <the-loading 
+            :isLoading="isLoading"
+        />
+        <the-notification
+            :isVisible="isVisibleNotification"
+            :msg="textError"
+        />
     </v-container>
 </template>
 <script>
 import moment from 'moment'
 export default {
     name: 'SignUp',
+    props: {
+        callback: {
+            type: String,
+            default: null
+        }
+    },
     data: () => ({
         name: null,
         email: null,
         birthday: null,
         password: null,
-        confirmPassword: null
+        confirmPassword: null,
+        isLoading: false,
+        isVisibleNotification: false,
+        textError: null
 
     }),
     methods: {
+        goSignIn () {
+            this.$router.push({ 
+                path: '/',
+                query: { callback: this.callback }
+            })
+        },
         async submitUser () {
-            const formIsValid = await this.$validator.validateAll()
-             
-            if (!formIsValid) {
-                return 
+            try {
+                const formIsValid = await this.$validator.validateAll()
+                
+                if (!formIsValid) {
+                    return 
+                }
+
+                this.isLoading = true
+                
+                const modelUser = {
+                    name: this.name,
+                    email: this.email,
+                    birthday: moment(this.birthday, 'DD/MM/YYYY').format('YYYY/MM/DD'),
+                    password: this.password
+                }
+
+                const { data: { token } } = await this.$http.post('/users/create', modelUser)
+                this.isLoading = false
+                window.location.href = `${this.callback}/#/?token=${token}`
+            
+            } catch (erro) {
+                this.isVisibleNotification = true
+                this.textError = erro
+                this.isLoading = false
             }
-
-            const modelUser = {
-                name: this.name,
-                email: this.email,
-                birthday: moment(this.birthday, 'DD/MM/YYYY').format('YYYY/MM/DD'),
-                password: this.password
-            }
-
-            await this.$http.post('/users/create', modelUser)
-
-            this.$emit('submit-user', modelUser)
         }
     }
 }
