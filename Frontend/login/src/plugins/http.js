@@ -8,7 +8,7 @@ const Http = (Vue) => {
 
   const http = Axios.create({
     headers,
-    baseURL: '0.0.0.0:9001'
+    baseURL: '/api'
   })
 
   Vue.prototype.$http = http
