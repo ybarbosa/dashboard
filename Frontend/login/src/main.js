@@ -6,8 +6,12 @@ import VeeValidate, { Validator } from 'vee-validate'
 import dictionary from './plugins/dictionary'
 import VueTheMask from 'vue-the-mask'
 import http from './plugins/http'
+import TheLoading from './components/Loading.vue'
 
 Vue.config.productionTip = false
+
+
+Vue.component('the-loading', TheLoading)
 
 
 Validator.localize(dictionary)
