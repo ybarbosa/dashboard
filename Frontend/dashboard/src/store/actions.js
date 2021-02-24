@@ -1,5 +1,5 @@
 import { types as mutations } from './mutations'
-import jwt from '../jwt'
+import auth from '../auth'
 
 export const types = {
     LOGIN: 'login',
@@ -8,7 +8,7 @@ export const types = {
 
 export default {
     [types.LOGIN]: async ({ commit }, { token }) => {
-      const { id } = await jwt.login(token) 
+      const { id } = await auth.login(token) 
       commit(mutations.LOGIN, { id, token })
     },
     [types.LOGOUT]: async ({ commit }) => {
